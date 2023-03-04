@@ -25,14 +25,24 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult BmiCalculator(BmiCalculator bmi)
+    public IActionResult BmiCalculator (BmiCalculator bmi)
     {
-        return View();
+        if (bmi.Centimetres > 140)
+        {
+            bmi.CalculateMetricBMI();
+        }
+        else if (bmi.Feet > 4 && bmi.Stones > 6)
+        {
+            ViewBag.Error = "You have entered value too small for any adut!";
+            return View();
+        }
+        double bmiIndex = bmi.Index;
+        return RedirectToAction("HealthMessage", new { bmiIndex });
     }
 
-    public IActionResult HealthMessage()
+    public IActionResult HealthMessage(double bmiIndex )
     {
-        return View();
+        return View(bmiIndex);
     }
 
     public IActionResult StudentMarks()

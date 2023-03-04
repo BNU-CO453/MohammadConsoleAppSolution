@@ -128,11 +128,11 @@ namespace ConsoleAppProject.App01
             return null;
         }
 
-//This C# code defines a private static method called "DisplayChoices" that displays a list of options for the user to choose from and prompts them to input their choice.
-//The options are displayed using interpolated strings that reference the values of the constants "FEET", "METRES", and "MILES".
+        //This C# code defines a private static method called "DisplayChoices" that displays a list of options for the user to choose from and prompts them to input their choice.
+        //The options are displayed using interpolated strings that reference the values of the constants "FEET", "METRES", and "MILES".
 
 
-private static string DisplayChoices(string prompt)
+        private static string DisplayChoices(string prompt)
         {
             Console.WriteLine();
             Console.WriteLine($" 1.{FEET}");
@@ -157,6 +157,7 @@ private static string DisplayChoices(string prompt)
 
         private double InputDistance(string prompt)
         {
+
             Console.Write(prompt);
             string value = Console.ReadLine();
             return Convert.ToDouble(value);
