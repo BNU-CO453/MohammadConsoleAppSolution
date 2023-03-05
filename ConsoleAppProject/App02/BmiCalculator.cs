@@ -61,7 +61,7 @@ namespace ConsoleAppProject.App02
             {
                 InputImperialDetails();
 
-                //CalculateImperialBMI();
+                CalculateImperailBMI();
 
             }
 
@@ -112,7 +112,8 @@ namespace ConsoleAppProject.App02
 
         public void CalculateMetricBMI()
         {
-            int metres = Centimetres * 100;
+            int metres = Centimetres / 100;
+            
             Index = Kilograms / (metres * metres);
         }
 
