@@ -45,7 +45,7 @@ namespace ConsoleAppProject.App02
         /// </sumary>
         public void CalculateIndex()
         {
-            ConsoleHelper.OutputHeading("Body Mass Index Calculator");
+            ConsoleHelper.OutputHeading("Body Mass Index Calculator by Mohammad Matloob ");
 
             Console.WriteLine("Mohammad Matloob");
 
@@ -113,10 +113,10 @@ namespace ConsoleAppProject.App02
         public void CalculateMetricBMI()
         {
             int metres = Centimetres * 100;
-            Index = Kilograms / (metres * metres);
+            Index = Kilograms / (metres / metres);
         }
 
-        public void CalculateImperailBMI()
+        public void CalculateImperialBMI()
         {
             Inches += Feet * InchesInFeet;
             Pounds += Stones * PoundsInStones;

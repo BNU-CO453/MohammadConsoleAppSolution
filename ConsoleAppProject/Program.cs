@@ -20,7 +20,7 @@ namespace ConsoleAppProject
         {
             Console.ForegroundColor = ConsoleColor.DarkBlue;
            
-            Console.WriteLine("BNU CO453 Applications Programming 2022-2023! ");
+            Console.WriteLine("BNU CO453 Applications Programming 2022-2023 By Mohammad Qasim Matloob! ");
             Console.WriteLine();
             
             //DistanceConverter converter = new DistanceConverter();
