@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using ConsoleAppProject.Helpers;
 
 namespace ConsoleAppProject.App03
@@ -209,12 +210,13 @@ namespace ConsoleAppProject.App03
             }
 
             Mean = total / Marks.Length;
+            OutputStats();
+            DisplayMenu();
         }
 
 
         public void OutputStats()
         {
-            CalculateStats();
 
             double overallMean = Mean;
             Console.WriteLine($"Mean: {overallMean.ToString("F")}");
@@ -239,20 +241,56 @@ namespace ConsoleAppProject.App03
                 GradeProfile[(int)grade]++;
             }
 
-            OutputGradeProfile();
+            //OutputGradeProfile();
+            DisplayMenu();
         }
 
         public void OutputGradeProfile()
         {
-            Grades grades = Grades.X;
-            Console.WriteLine();
-
-            foreach(int count in GradeProfile)
+            int[] gradeCounts = new int[5];
+            int highestMark = 0;
+            int lowestMark = 100;
+            // Calculate grade counts, highest mark, and lowest mark
+            foreach (int mark in Marks)
             {
-                int percentage = count * 100 / Marks.Length;
-                Console.WriteLine($"Grade {grades} {percentage}% Count {count}");
-                grades++;
+                if (mark >= LowerGradeA)
+                {
+                    gradeCounts[4]++;
+                    if (mark > highestMark) highestMark = mark;
+                    if (mark < lowestMark) lowestMark = mark;
+                }
+                else if (mark >= lowerGardeB)
+                {
+                    gradeCounts[3]++;
+                    if (mark < lowestMark) lowestMark = mark;
+                }
+                else if (mark >= LowerGradeC)
+                {
+                    gradeCounts[2]++;
+                    if (mark < lowestMark) lowestMark = mark;
+                }
+                else if (mark >= LowerGradeD)
+                {
+                    gradeCounts[1]++;
+                    if (mark < lowestMark) lowestMark = mark;
+                }
+                else
+                {
+                    gradeCounts[0]++;
+                    if (mark < lowestMark) lowestMark = mark;
+                }
             }
+
+           
+            
+                int total = gradeCounts.Sum();
+                Console.WriteLine($"A Grade: {gradeCounts[4]} {(double)gradeCounts[4] / total:P}");
+                Console.WriteLine($"B Grade: {gradeCounts[3]} {(double)gradeCounts[3] / total:P}");
+                Console.WriteLine($"C Grade: {gradeCounts[2]} {(double)gradeCounts[2] / total:P}");
+                Console.WriteLine($"D Grade: {gradeCounts[1]} {(double)gradeCounts[1] / total:P}");
+                Console.WriteLine($"F Grade: {gradeCounts[0]} {(double)gradeCounts[0] / total:P}");
+            
+            DisplayMenu();
         }
        
 
