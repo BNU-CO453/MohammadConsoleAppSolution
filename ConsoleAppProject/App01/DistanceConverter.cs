@@ -180,6 +180,24 @@ namespace ConsoleAppProject.App01
             Console.WriteLine("---------------------------------------------\n");
 
         }
+        
+        private static string SelectUnit1(string prompt)
+        {
+            string choice = DisplayChoices(prompt);
+
+            string unit = ExecuteChoice(choice);
+            if (unit == null)
+            {
+                Console.WriteLine("Invalid unit choice. Please try again.");
+                unit = SelectUnit1(prompt);
+            }
+            else
+            {
+                Console.WriteLine($"\n You have chosen {unit}");
+            }
+
+            return unit;
+        }
 
     }
 }
