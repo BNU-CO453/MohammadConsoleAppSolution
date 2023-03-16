@@ -121,15 +121,13 @@ namespace ConsoleAppProject.Helpers
         /// </summary>
         public static void OutputHeading(string heading)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+          
 
             Console.WriteLine("\n ---------------------------------");
             Console.WriteLine($"    {heading}          ");
-            Console.WriteLine("     by Derek Peacock           ");
+            Console.WriteLine("     by Mohammad Qasim Matloobb           ");
             Console.WriteLine(" ---------------------------------" +
                 "\n");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
         }
 
         /// <summary>

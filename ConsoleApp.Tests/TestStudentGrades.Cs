@@ -67,7 +67,9 @@ namespace ConsoleApp.Tests
 			Assert.AreEqual(expectedMean, conveter.Mean);
 		}
 
-		public void TestCalculateMin()
+        [TestMethod]
+
+        public void TestCalculateMin()
 		{
 			//Arange
 			conveter.Marks = testmarks;
@@ -79,6 +81,17 @@ namespace ConsoleApp.Tests
 			//Assert
 			Assert.AreEqual(expectedMin, conveter.Minimum);
 
+		}
+        [TestMethod]
+
+        public void TestCalculateMax()
+		{
+			conveter.Marks = testmarks;
+			int expectedMax = 100;
+
+			conveter.CalculateStats();
+
+			Assert.AreEqual(expectedMax, conveter.Maximum);
 		}
 
 	        [TestMethod]

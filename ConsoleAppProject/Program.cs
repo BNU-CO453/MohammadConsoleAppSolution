@@ -23,13 +23,35 @@ namespace ConsoleAppProject
             Console.WriteLine("BNU CO453 Applications Programming 2022-2023 By Mohammad Qasim Matloob! ");
             Console.WriteLine();
             
-            //DistanceConverter converter = new DistanceConverter();
 
-            //converter.ConvertDistance();
+            string[] choices = new string[3];
 
-            BmiCalculator calcultor = new BmiCalculator();
-            calcultor.CalculateIndex();
+            choices[0] = "Distance Converter";
+            choices[1] = "BMI Calculator";
+            choices[2] = "Student Marks";
 
-        }
+            int choice = ConsoleHelper.SelectChoice(choices);
+
+            if (choice == 1)
+            {
+                //DistanceConverter converter = new DistanceConverter();
+                //converter.Run();
+            }
+            else if (choice == 2)
+            {
+                //BMI bmi = new BMI();
+                //BMI calculator = new BMI();
+                //calculator.Run();
+
+            }
+            else if (choice == 3)
+            {
+                //BMI bmi = new BMI();
+                StudentGrades stu = new StudentGrades();
+                stu.Run();
+
+            }
+
+;        }
     }
 }

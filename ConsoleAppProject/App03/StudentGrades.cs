@@ -17,6 +17,8 @@ namespace ConsoleAppProject.App03
         public const int lowerGardeB = 60;
         public const int LowerGradeA = 70;
         public const int HighestMark = 100;
+        public double LowestMark;
+        private int mark;
 
         public string[] Students { get; set; }
         public int[] Marks { get; set; }
@@ -24,59 +26,207 @@ namespace ConsoleAppProject.App03
         public double Mean { get; set; }
         public int Minimum { get; set; }
         public int Maximum { get; set; }
+        public object StudentClass { get; private set; }
 
-        public void Student()
+        public void Run()
+        {
+            DisplayMenu();
+            //InputMarks();
+        }
+        public StudentGrades()
         {
             Students = new string[]
             {
-                "Luke","Euan","Munir", "Qasim","JoySon",
+                "Luke", "Euan", "Munir", "Qasim", "JoySon",
                 "Keegan","Muhammad","Hamza","mike","justin",
 
             };
+
             GradeProfile = new int[(int)Grades.A + 1];
             Marks = new int[Students.Length];
         }
+
+        public void DisplayMenu()
+        {
+            Console.WriteLine("Please select an option:");
+            Console.WriteLine("1. Input Marks");
+            Console.WriteLine("2. Output Marks");
+            Console.WriteLine("3. OutputStats Mark");
+            Console.WriteLine("4. Output Grade Profile");
+            Console.WriteLine("5. Quit");
+
+            int selection = 0;
+            bool isValidSelection = false;
+
+            while (!isValidSelection)
+            {
+                Console.Write("Enter your selection: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out selection))
+                {
+                    if (selection >= 1 && selection <= 5)
+                    {
+                        isValidSelection = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid selection. Please enter a number between 1 and 5.");
+                    }
+                }
+            }
+
+            switch (selection)
+            {
+                case 1:
+                    InputMarks();
+                    break;
+                case 2:
+                    OutputMarks();
+                    break;
+                case 3:
+                    CalculateStats();
+                    OutputStats();
+                    break;
+                case 4:
+                    OutputGradeProfile();
+                    break;
+                case 5:
+                    //Quit
+                    Console.WriteLine("Exiting program...");
+                    Environment.Exit(0);
+                    break;
+            }
+        }
+
         public void InputMarks()
+        {
+            ConsoleHelper.OutputHeading("Please Enter Mark for Each Student");
+
+
+            for (int i = 0; i < Students.Length; i++)
+                
+            {
+                bool validInput = false;
+                int mark = 0;
+                while (!validInput)
+                {
+                    Console.Write($"Enter mark for {Students[i]};");
+                    string input = Console.ReadLine();
+
+                    if(!int.TryParse(input, out mark))
+                    {
+                        Console.WriteLine("as");
+                    }
+                    else
+                    {
+                        validInput = true;
+                    }
+                }
+                
+                Marks[i] = mark;
+            }
+            Console.WriteLine();
+            ConsoleHelper.OutputHeading("Students Marks System");
+            
+            DisplayMenu();
+        }
+
+          public void UpdateGradeProfile(int mark)
         {
             throw new NotImplementedException();
         }
+
+
+
         /// <summary>
-        /// list all the student and Display their
+        /// list all the studentsstudent and Display their
         /// name and current mark 
         /// </summary>
-       
-        public void OutputMarks()
-        {
-            {
-                Console.WriteLine("\n---------------------------------------------");
-                Console.WriteLine("             Student  Marks        ");
-                Console.WriteLine("           By Mohammad Qasim Matloob  ");
-                Console.WriteLine("---------------------------------------------\n");
 
+        public void OutputMarks()
+            {
+                ConsoleHelper.OutputHeading("The each Student Marks");
+
+                for (int i = 0; i < Students.Length; i++)
+                {
+                    int mark = Marks[i];
+                    Grades grades = ConvertToGrade(mark);
+                    Console.WriteLine($"Student Name: {Students[i]} \tStudent Mark: {mark}\t" +
+                        $"Student Grade: {grades}\tStudent Class: {StudentClass}\t");
+                }
+                Console.WriteLine();
+                ConsoleHelper.OutputHeading("\t\t Student Marks System");
+                DisplayMenu();
             }
 
+        
 
-        }
         public Grades ConvertToGrade(int mark)
         {
             if (mark >= 0 && mark < LowerGradeD)
             {
+                StudentClass = "Refered";
                 return Grades. F;
             }
 
-            else return Grades.D;
+            else if (mark >= LowerGradeD && mark < LowerGradeC)
+            {
+                StudentClass = "Lower Grade";
+                return Grades.D;
+            }
+            else if (mark >= LowerGradeC && mark < lowerGardeB)
+            {
+                StudentClass = "Pass";
+                return Grades. C;
+            }
+            else if (mark >= lowerGardeB && mark < LowerGradeA)
+            {
+                StudentClass = "Upper Second";
+                return Grades. B;
+            }
+            else if (mark >= LowerGradeA && mark <= HighestMark)
+            {
+                StudentClass = "First Class";
+                return Grades. A;
+            }
+            return Grades. F;
   
         }
 
         public void CalculateStats()
         {
+            Minimum = Marks[0];
+            Maximum = Marks[0];
+
             double total = 0;
-            foreach(int mark in Marks)
+
+            foreach (int mark in Marks)
             {
-                total = total + mark;
+                if (mark > Maximum) Maximum = mark;
+                if (mark < Minimum) Minimum = mark;
+                total += mark;
             }
+
             Mean = total / Marks.Length;
         }
+
+
+        public void OutputStats()
+        {
+            CalculateStats();
+
+            double overallMean = Mean;
+            Console.WriteLine($"Mean: {overallMean.ToString("F")}");
+
+            int minimumMark = Minimum;
+            Console.WriteLine($"Minimum mark: {minimumMark}");
+
+            int maximumMark = Maximum;
+            Console.WriteLine($" Maximum mark: {maximumMark}");
+        }
+
+
         public void CalculateGradeProfile()
         {
             for(int i = 0; i < GradeProfile.Length; i++)
@@ -91,7 +241,8 @@ namespace ConsoleAppProject.App03
 
             OutputGradeProfile();
         }
-        private void OutputGradeProfile()
+
+        public void OutputGradeProfile()
         {
             Grades grades = Grades.X;
             Console.WriteLine();
